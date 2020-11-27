@@ -1,0 +1,156 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oblig Web fundamentals</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Oblig</h1>
+    <h3>1. What components are part of the Von Neumann Architecture</h3>
+    <p>
+    <ul>
+        <li>A processing unit that contains an arithmetic logic unit and processor registers</li>
+        <li>A control unit that contains an instruction register and program counter</li>
+        <li>Memory that stores data and instructions</li>
+        <li>External mass storage</li>
+        <li>Input and output mechanisms</li>
+    </ul>
+        </p>
+    <h3>2. What is user space?</h3>
+    <p>All code that runs outside the operating system's kernel.</p>
+    <h3>3. What is the shell? </h3>
+    <p>A shell is the command-line user interface, a user-space process used to launch other processes and process their I/O.</p>
+    <h3>4. Where is the shell located?</h3>
+    <p>In the user space</p>
+    <h3>5. What is the main task of the shell?</h3>
+    <p>To read commands and run other programs.</p>
+
+    <h3>6. What is the octal representation of a file that can be read and written only by its owner?</h3>
+    <p>600</p>
+
+    <h3>7.In UNIX systems, what is the common name of the special user that can access and modify every file?</h3>
+    <p>Superuser/root</p>
+
+    <h3>8.Which file permission classes are available in UNIX systems?</h3>
+    <p>Each file has an owner (a user) and a group to which it belongs:
+        <ul>
+            <li>User (u)— the user owning the entity</li>
+            <li>Group (g)— the group the file belongs to</li>
+            <li>Others (o) — every user on the system</li>
+        </ul>
+    </p>
+
+    <h3>9.As of 2020, which percentage of servers have UNIX-like OS?</h3>
+    <p>70% (according to lecture)</p>
+    
+    <h3>10.The command ssh will:</h3>
+    <p>Enable a secure connection to the SSH server on a remote machine.</p>
+
+    <h3>11.UNIX Command: access your current working directory</h3>
+    <code>dir=$(pwd)</code>
+
+    <h3>12.UNIX Command: rename files (give an example)</h3>
+    <p>There is not a command for renaming files,  mv is used to change the name or to move a file into a different directory:</p>
+    <code>mv fileabc newname</code>
+
+    <h3>13.UNIX Command: schedule the execution of programs in the future</h3>
+    <code>crontab -e</code>
+
+    <h3>14.UNIX Command: Forcefully shutdown the command with process ID 123</h3>
+    <p>You have to use the "kill" command together with the prossess id (PID). In this example it would be:</p>
+    <code>kill -9 123</code>
+
+    <h3>15.UNIX Command:access your root user</h3>
+    <code>sudo -i/sudo -s</code>
+
+    <h3>16. Crontab scheduled: At minute 30 on Sunday.</h3>
+    <code>30 * * * SUN</code>
+
+    <h3>17. Crontab scheduled: At minute 30 on day-of-month 15.</h3>
+    <code>30 * 15 * *</code>
+
+    <h3>18. Crontab scheduled: At 05:30 on every day-of-week from Sunday through Monday in June.</h3>
+    <code>30 5 * 6 SUN-MON</code>
+
+    <h3>19.Script:print your name and date</h3>
+    <code>name=Daniel
+        d=$(date +%Y-%m-%d)
+        echo "$name" "$d"
+        </code>
+
+    <h3>20.Script:add two numeric values, print the result</h3>
+    <code>a=5
+        b=7
+        c=`expr $a + $b`
+        echo $c
+        </code>
+
+    <h3>21.Script:inputs username, prints “USERNAME stored”</h3>
+    <p>Depends on whats asked for here.
+        If the question is taking the current username + the word stored:</p>
+        <code>echo "$USER"'stored'</code>
+        <p>If the question is to ask for a username as input + the word stored:</p>
+        <code>read -p "What's your username? : " n1
+            echo "$n1 stored"
+            </code>
+
+
+
+    <h3>22.Script:Store the output of the command “hostname” in a variable. Display “This script is running on _.” where “_” is the output of the “hostname” command.</h3>
+    <code>a=' This script is running on'
+        b=$(hostname)
+        c="${a} $b"
+        echo "${c}":;
+        </code>
+
+    <h3>23.Script:Store the output of the workingdirectory (from where the script is run) in a variable then print the variable.</h3>
+    <code> wDir=$PWD
+        echo $wDir
+       </code>
+
+    <h3>24.Create a step by step tutorial on how to create a cronjob that prints “Task scheduled at”+ DATE. Cronjob is scheduled every 30 minutes on today’s date(only today).</h3>
+    <code>
+        # 1. Store string “Task scheduled at” in a var:
+        message='Task scheduled at'
+        
+        # 2. Set current date in the right format, assign to variable:
+        
+        CRONDATE=$(date +"%d %m %y")
+        
+        # 3. Echo current date, crontab concatinated with $a
+        echo "$message */30 * * $CRONDATE"
+    </code>
+
+    <h3>25.Create a script that takes an input (letter or number) that will display the answer of a question. The script should when started list a menu for the user with the different questions that can be chosen and which corresponding letter the user will have to give as input to display the answer of the desired question. One of the possible inputs the user should be able to make is "q" for quitting the script. The menu should also have a defaultcase where all the items is displayed again,or no changes is made if the user gives an invalid input.Hint: use a switch case to be able to handle the menu. Each option in the menu should lead to an echo of the answer</h3>
+    <p>Creates .sh file, runs said file with bash command:</p>
+    <code>while true; do
+        echo "Enter the number (1 or 2) to the question you want the answer to: "
+        echo "1) What shape is the earth?"
+        echo "2) What shape is the earth according fo flat earthers? "
+        echo "Input [Q] to quit."
+        read QUESTION
+        
+        echo -n "The answer to question $QUESTION is "
+        
+        case $QUESTION in
+        
+          1)
+            echo "Round"
+            ;;
+        
+          2)
+            echo "Flat"
+            ;;
+          q)
+            echo "Thank you, goodbye!"
+            exit
+            ;;
+          *)
+            echo
+            echo "Invalid, choose 1 or 2!"
+            ;;
+        esac
+        done</code>
+</body>
+</html>
